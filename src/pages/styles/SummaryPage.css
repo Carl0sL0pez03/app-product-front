@@ -1,0 +1,63 @@
+.summary-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.summary-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.product-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  font-size: 16px;
+}
+
+.fees-container {
+  margin-bottom: 20px;
+}
+
+.fee {
+  font-weight: bold;
+  color: #333;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.total-amount {
+  color: #e63946;
+}
+
+.confirm-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.confirm-button:hover {
+  background-color: #43a047;
+}
