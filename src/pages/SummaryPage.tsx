@@ -1,9 +1,41 @@
-import React from 'react'
+import React from "react";
 
-function SummaryPage() {
+import { useSelector } from "react-redux";
+
+import { RootState } from "../store/storePayments";
+import { ISummaryPageProps } from "./types/summaryTypes";
+
+function SummaryPage({ onConfirmPayment }: ISummaryPageProps) {
+  const { products, total, fees } = useSelector(
+    (state: RootState) => state.paymentSummary
+  );
+
   return (
-    <div>SummaryPage</div>
-  )
+    <div className="summary-container">
+      <h1 className="summary-title">Resumen de pagos</h1>
+      <ul className="product-list">
+        {products?.map((product) => (
+          <li key={product?._id} className="product-item">
+            {product?.name} - ${product?.price}
+          </li>
+        ))}
+      </ul>
+      <div className="fees-container">
+        <p>
+          Cuota base: <span className="fee">{fees?.base}</span>
+        </p>
+        <p>
+          Tasa de entrega: <span className="fee">{fees?.delivery}</span>
+        </p>
+      </div>
+      <p className="total">
+        Total: <span className="total-amount">${total}</span>
+        <button onClick={onConfirmPayment} className="confirm-button">
+          Confirmar Pago
+        </button>
+      </p>
+    </div>
+  );
 }
 
-export default SummaryPage
+export default SummaryPage;
