@@ -18,7 +18,7 @@ function ProductPage() {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.product
   );
-  const cartItems = useSelector((state: RootState) => state?.cart?.cartItems);
+  const cartItems = useSelector((state: RootState) => state?.cart?.cartItems);  
 
   useEffect(() => {
     dispatch(fetchProducts());
