@@ -1,6 +1,12 @@
 import { AnyAction } from "redux";
 
-import { IProductState } from "../types/productTypes";
+import {
+  FETCH_PRODUCTS_FAILURE,
+  FETCH_PRODUCTS_REQUEST,
+  FETCH_PRODUCTS_SUCCESS,
+  IProductState,
+  UPDATE_STOCK,
+} from "../types/productTypes";
 
 const initialState: IProductState = {
   products: [],
@@ -13,13 +19,13 @@ export function productReducer(
   action: AnyAction
 ): IProductState {
   switch (action.type) {
-    case "FETCH_PRODUCTS_REQUEST":
+    case FETCH_PRODUCTS_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case "FETCH_PRODUCTS_SUCCESS":
+    case FETCH_PRODUCTS_SUCCESS:
       if ("payload" in action && Array.isArray(action?.payload)) {
         return {
           ...state,
@@ -29,7 +35,7 @@ export function productReducer(
         };
       }
       break;
-    case "FETCH_PRODUCTS_FAILURE":
+    case FETCH_PRODUCTS_FAILURE:
       if ("payload" in action && typeof action?.payload === "string") {
         return {
           ...state,
@@ -38,7 +44,7 @@ export function productReducer(
         };
       }
       break;
-    case "UPDATE_STOCK":
+    case UPDATE_STOCK:
       if (
         "payload" in action &&
         typeof action.payload === "object" &&

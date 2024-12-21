@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MASTERCARD, VISA } from "../store/types/cartTypes";
 
 const useCreditCardValidation = () => {
   const [cardType, setCardType] = useState<string | null>(null);
@@ -9,10 +10,10 @@ const useCreditCardValidation = () => {
     const mastercardRegEx = /^(?:5[1-5][0-9]{14})$/;
 
     if (visaRegEx.test(cardNumber)) {
-      setCardType("VISA");
+      setCardType(VISA);
       setIsValid(true);
     } else if (mastercardRegEx.test(cardNumber)) {
-      setCardType("MasterCard");
+      setCardType(MASTERCARD);
       setIsValid(true);
     } else {
       setCardType(null);
@@ -35,7 +36,7 @@ const useCreditCardValidation = () => {
   };
 
   const validateCVV = (cvv: string, type: string): boolean => {
-    return (type === "VISA" || type === "MasterCard") && cvv?.length === 3;
+    return (type === VISA || type === MASTERCARD) && cvv?.length === 3;
   };
 
   return {

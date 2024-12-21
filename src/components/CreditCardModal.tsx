@@ -7,6 +7,7 @@ import {
   ICreditCardModalProps,
 } from "./types/creditCardTypes";
 import useCreditCardValidation from "../hook/useCreditCardValidation";
+import { MASTERCARD, VISA } from "../store/types/cartTypes";
 
 import "./styles/CreditCardModal.css";
 
@@ -84,8 +85,8 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
   const handleFormSubmit = (data: ICreditCardFormData) => {
     console.log(data);
 
-    onSubmit(data);
-    onClose();
+    /* onSubmit(data);
+    onClose(); */
   };
 
   return (
@@ -105,13 +106,13 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
               onChange={handleCardNumberChange}
             />
             <div className="card-logo">
-              {cardType === "VISA" && (
+              {cardType === VISA && (
                 <img
                   src="https://logos-world.net/wp-content/uploads/2020/04/Visa-Emblem.jpg"
                   alt="Visa"
                 />
               )}
-              {cardType === "MasterCard" && (
+              {cardType === MASTERCARD && (
                 <img
                   src="https://th.bing.com/th/id/OIP.zeRTxpEsrjvlKPWbIlwwagHaEK?rs=1&pid=ImgDetMain"
                   alt="MasterCard"
@@ -124,7 +125,7 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
             <p className="error">Introduzca un número de tarjeta válido.</p>
           )}
 
-          <label htmlFor="expiryDate">Expiry Date</label>
+          <label htmlFor="expiryDate">Fecha de expiración</label>
           <input
             {...register("expiryDate", {
               required: "La fecha de expiración es obligatoria",
@@ -144,6 +145,14 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
             onChange={handleCvvChange}
           />
           {errors?.cvv && <p className="error">Introduzca un CVV válido.</p>}
+
+          <label htmlFor="direction">Dirección</label>
+          <input
+            {...register("direction", {
+              required: "La dirección es obligatoria.",
+            })}
+            name="direction"
+          />
 
           <button
             type="submit"
