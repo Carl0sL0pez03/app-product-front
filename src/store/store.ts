@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
-import { productReducer } from "./reducers/productReducer";
+import { productReducer, cartReducer, paymentSummaryReducer } from "./reducers";
 
 const store = configureStore({
   reducer: {
     product: productReducer,
+    paymentSummary: paymentSummaryReducer,
+    cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });

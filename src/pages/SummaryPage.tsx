@@ -2,8 +2,8 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
-import { RootState } from "../store/storePayments";
 import { ISummaryPageProps } from "./types/summaryTypes";
+import { RootState } from "../store/store";
 
 function SummaryPage({ onConfirmPayment }: ISummaryPageProps) {
   const { products, total, fees } = useSelector(

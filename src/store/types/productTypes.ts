@@ -5,12 +5,17 @@ export interface IProduct {
   price?: number;
   stock?: number;
   urlImg?: string;
+  quantity?: number;
 }
 
 export interface IProductState {
   products?: IProduct[];
   loading?: boolean;
   error?: string | null;
+}
+
+export interface ICartProduct {
+  cartItems?: IProduct[];
 }
 
 export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";

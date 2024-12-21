@@ -4,6 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "../store/store";
 import { fetchProducts } from "../store/actions/productActions";
+import { IProduct } from "../store/types/productTypes";
+import {
+  addToCart,
+  removeFromCart,
+  updateCartQuantity,
+} from "../store/actions/cartActions";
+
 import "./styles/ProductPage.css";
 
 function ProductPage() {
@@ -11,10 +18,31 @@ function ProductPage() {
   const { products, loading, error } = useSelector(
     (state: RootState) => state.product
   );
+  const cartItems = useSelector((state: RootState) => state?.cart?.cartItems);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  const handleAddToCart = (product: IProduct) => {
+    const currentQuantity =
+      cartItems?.find((item) => item?._id === product?._id)?.quantity || 0;
+
+    dispatch(addToCart({ ...product, quantity: currentQuantity + 1 }));
+  };
+
+  const adjustQuantity = (productId: string, amount: number) => {
+    const currentQuantity =
+      cartItems?.find((item) => item?._id === productId)?.quantity || 0;
+
+    const updatedQuantity = Math.max(0, currentQuantity + amount);
+
+    if (updatedQuantity > 0) {
+      dispatch(updateCartQuantity(productId, updatedQuantity));
+    } else {
+      dispatch(removeFromCart(productId));
+    }
+  };
 
   if (loading) return <div className="loading">Cargando producto(s)...</div>;
   if (error) return <div className="error">Error: {error}...</div>;
@@ -34,6 +62,29 @@ function ProductPage() {
               <h2 className="product-name">{product?.name}</h2>
               <p className="product-price">${product?.price}</p>
               <p className="product-stock">Stock: {product?.stock}</p>
+              {cartItems?.find((item) => item?._id === product?._id) ? (
+                <div className="quantity-control">
+                  <button onClick={() => adjustQuantity(product?._id!, -1)}>
+                    -
+                  </button>
+                  <span>
+                    {
+                      cartItems?.find((item) => item?._id === product?._id)
+                        ?.quantity
+                    }
+                  </span>
+                  <button onClick={() => adjustQuantity(product?._id!, 1)}>
+                    +
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="add-to-cart-btn"
+                >
+                  Agregar al Carrito
+                </button>
+              )}
             </div>
           </div>
         ))}

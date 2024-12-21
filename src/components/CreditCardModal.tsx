@@ -51,9 +51,11 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
           />
           {errors?.cvv && <p>Introduzca un CVV válido.</p>}
 
-          <button type="submit">Submit</button>
-          <button type="button" onClick={onClose}>
-            Cancel
+          <button type="submit" className="checkout-button">
+            Pagar
+          </button>
+          <button type="button" className="cancel-button" onClick={onClose}>
+            Cancelar
           </button>
         </form>
       </div>
