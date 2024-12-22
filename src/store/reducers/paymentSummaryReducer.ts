@@ -1,15 +1,20 @@
 import { AnyAction } from "redux";
 
-interface PaymentSummaryState {
-  products: { _id?: string; name?: string; price?: number }[];
-  total?: number;
-  fees?: { base?: number; delivery?: number };
-}
+import {
+  PaymentSummaryState,
+  SET_PAYMENT_DETAILS,
+} from "../types/paymentTypes";
 
 const initialState: PaymentSummaryState = {
   products: [],
   total: 0,
   fees: { base: 0, delivery: 0 },
+  paymentDetails: {
+    cardNumber: "",
+    cvv: "",
+    direction: "",
+    expiryDate: "",
+  },
 };
 
 export function paymentSummaryReducer(
@@ -17,6 +22,8 @@ export function paymentSummaryReducer(
   action: AnyAction
 ): PaymentSummaryState {
   switch (action.type) {
+    case SET_PAYMENT_DETAILS:
+      return { ...state, paymentDetails: action?.payload };
     default:
       return state;
   }

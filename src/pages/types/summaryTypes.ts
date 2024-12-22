@@ -1,3 +1,3 @@
 export interface ISummaryPageProps {
-  onConfirmPayment: () => void;
+  onConfirmPayment?: () => void;
 }
