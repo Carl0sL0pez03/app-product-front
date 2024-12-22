@@ -9,6 +9,7 @@ import localforage from "./localForageConfig";
 import { SET_CART_ITEMS } from "./store/types/cartTypes";
 
 import "./styles.css";
+import Authenticate from "./components/Authenticate";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,11 +25,13 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<ProductPage />} />
-        <Route path="/summary" element={<SummaryPage  />} />
-      </Routes>
+      <Authenticate>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<ProductPage />} />
+          <Route path="/summary" element={<SummaryPage />} />
+        </Routes>
+      </Authenticate>
     </Router>
   );
 };
