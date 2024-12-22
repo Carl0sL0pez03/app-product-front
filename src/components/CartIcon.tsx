@@ -1,6 +1,8 @@
 import React from "react";
 
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 import { RootState } from "../store/store";
 
@@ -11,7 +13,7 @@ export default function CartIcon() {
 
   return (
     <div className="cart-icon">
-      <img src="https://static.vecteezy.com/system/resources/previews/019/787/045/non_2x/shopping-cart-icon-shopping-basket-on-transparent-background-free-png.png" alt="Cart" />
+      <FontAwesomeIcon icon={faShoppingCart} size="lg" />
       <span className="cart-count">{cartItems?.length}</span>
     </div>
   );
