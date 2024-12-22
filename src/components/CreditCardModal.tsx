@@ -1,6 +1,8 @@
 import React, { ChangeEvent } from "react";
 
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {
   ICreditCardFormData,
@@ -10,8 +12,12 @@ import useCreditCardValidation from "../hook/useCreditCardValidation";
 import { MASTERCARD, VISA } from "../store/types/cartTypes";
 
 import "./styles/CreditCardModal.css";
+import { setPaymentDetails } from "../store/actions/paymentDetails";
 
 function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -83,10 +89,9 @@ function CreditCardModal({ onClose, onSubmit }: ICreditCardModalProps) {
   };
 
   const handleFormSubmit = (data: ICreditCardFormData) => {
-    console.log(data);
-
-    /* onSubmit(data);
-    onClose(); */
+    dispatch(setPaymentDetails(data));
+    navigate("/summary");
+    onClose();
   };
 
   return (

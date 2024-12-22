@@ -6,6 +6,7 @@ import { RootState } from "../store/store";
 
 import "./styles/CartDropdown.css";
 import CreditCardModal from "./CreditCardModal";
+import { formatCurrency } from "../utils/formatCurrency";
 
 export default function CartDropdown() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -27,7 +28,7 @@ export default function CartDropdown() {
                 style={{ width: "50px" }}
               />
               <span>
-                {item?.name} - ${item?.price} x {item?.quantity}
+                {item?.name} - {formatCurrency(item?.price!)} x {item?.quantity}
               </span>
             </div>
           ))
@@ -38,7 +39,7 @@ export default function CartDropdown() {
         onClick={() => setIsModalOpen(true)}
         disabled={isEmpty}
       >
-        Pagar con tarjeta
+        Pagar con tarjeta de crédito
       </button>
       {isModalOpen && (
         <CreditCardModal

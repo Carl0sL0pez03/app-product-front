@@ -12,13 +12,14 @@ import {
 } from "../store/actions/cartActions";
 
 import "./styles/ProductPage.css";
+import { formatCurrency } from "../utils/formatCurrency";
 
 function ProductPage() {
   const dispatch: AppDispatch = useDispatch();
   const { products, loading, error } = useSelector(
     (state: RootState) => state.product
   );
-  const cartItems = useSelector((state: RootState) => state?.cart?.cartItems);  
+  const cartItems = useSelector((state: RootState) => state?.cart?.cartItems);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -60,7 +61,7 @@ function ProductPage() {
             />
             <div className="product-info">
               <h2 className="product-name">{product?.name}</h2>
-              <p className="product-price">${product?.price}</p>
+              <p className="product-price">{formatCurrency(product?.price!)}</p>
               <p className="product-stock">Stock: {product?.stock}</p>
               {cartItems?.find((item) => item?._id === product?._id) ? (
                 <div className="quantity-control">

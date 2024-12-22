@@ -1,10 +1,11 @@
 .summary-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: auto;
   background: #fff;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  margin-top: 10px;
 }
 
 .summary-title {
@@ -20,14 +21,44 @@
 }
 
 .product-item {
-  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
   border-bottom: 1px solid #eee;
-  color: #666;
+  padding-bottom: 15px;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.product-details {
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.fee {
+  font-weight: bold;
+  color: #333;
+}
+
+.product-price,
+.product-quantity,
+.product-subtotal {
   font-size: 16px;
+  color: #666;
 }
 
 .fees-container {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .fee {
@@ -36,28 +67,27 @@
 }
 
 .total {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #000;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .total-amount {
   color: #e63946;
 }
 
-.confirm-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+@media (max-width: 768px) {
+  .product-item {
+    flex-direction: column;
+    align-items: start;
+  }
 
-.confirm-button:hover {
-  background-color: #43a047;
+  .product-image {
+    margin-bottom: 10px;
+  }
+
+  .product-details {
+    align-items: start;
+  }
 }
