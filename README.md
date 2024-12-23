@@ -21,7 +21,7 @@ This project is an e-commerce application that allows users to browse products, 
 
 ```bash
 $ git clone https://github.com/Carl0sL0pez03/app-product-front
-$ cd app-product-api
+$ cd app-product-front
 $ npm install
 ```
 ###  Test variables are uploaded for a user with only temporary DynamoDB permissions for 1 week.
