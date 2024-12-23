@@ -2,15 +2,19 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 import { ISummaryPageProps } from "./types/summaryTypes";
 import { RootState } from "../store/store";
 
 import "./styles/SummaryPage.css";
 import { formatCurrency } from "../utils/formatCurrency";
+import { ITransaction } from "src/utils/type/transactionTypes";
 
-function SummaryPage({ onConfirmPayment }: ISummaryPageProps) {
+function SummaryPage({}: ISummaryPageProps) {
   const navigate = useNavigate();
+  const { user } = useAuth0();
 
   const { paymentDetails } = useSelector(
     (state: RootState) => state.paymentSummary
@@ -22,6 +26,27 @@ function SummaryPage({ onConfirmPayment }: ISummaryPageProps) {
 
   const handleButtonToHome = () => {
     navigate("/");
+  };
+
+  const handleConfirmPayment = async () => {
+    try {
+      const apiBaseUrl = process.env.REACT_APP_URL_API;
+      const transactionData: ITransaction = {
+        products: cartItems?.map(({ _id, name }) => ({ _id, name })),
+        valueProducts: total,
+        creatorName: user?.name || user?.email,
+        paymentDetails
+      };
+      const response = await axios.post(
+        `${apiBaseUrl}/api/transactions/create`,
+        transactionData
+      );
+      console.log("transac", response);
+
+      navigate("/result");
+    } catch (error) {
+      console.error("Error al crear la transacción: ", error);
+    }
   };
 
   return (
@@ -64,7 +89,7 @@ function SummaryPage({ onConfirmPayment }: ISummaryPageProps) {
         </div>
         <p className="total">
           Total: <span className="total-amount">{formatCurrency(total!)}</span>
-          <button onClick={onConfirmPayment} className="checkout-button">
+          <button onClick={handleConfirmPayment} className="checkout-button">
             Confirmar Pago
           </button>
           <button onClick={handleButtonToHome} className="cancel-button">

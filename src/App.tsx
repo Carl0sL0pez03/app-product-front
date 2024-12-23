@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { ProductPage, SummaryPage } from "./pages";
+import { ProductPage, ResultPage, SummaryPage } from "./pages";
 import { NavBar } from "./components";
 import localforage from "./localForageConfig";
 import { SET_CART_ITEMS } from "./store/types/cartTypes";
@@ -30,6 +30,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ProductPage />} />
           <Route path="/summary" element={<SummaryPage />} />
+          <Route path="/result" element={<ResultPage />} />
         </Routes>
       </Authenticate>
     </Router>
