@@ -14,6 +14,7 @@ This project is an e-commerce application that allows users to browse products, 
 - Frontend: React, Redux, TypeScript
 - Backend: Node.js, NestJS
 - Database: DynamoDB
+- Temporary database: IndexedDB
 - Payment: Wompi (PENDING)
 
 
