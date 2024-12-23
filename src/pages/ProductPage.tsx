@@ -62,7 +62,7 @@ function ProductPage() {
             <div className="product-info">
               <h2 className="product-name">{product?.name}</h2>
               <p className="product-price">{formatCurrency(product?.price!)}</p>
-              <p className="product-stock">Stock: {product?.stock}</p>
+              <p className="product-stock">Existencias: {product?.stock}</p>
               {cartItems?.find((item) => item?._id === product?._id) ? (
                 <div className="quantity-control">
                   <button onClick={() => adjustQuantity(product?._id!, -1)}>
